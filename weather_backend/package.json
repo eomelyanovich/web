@@ -1,0 +1,18 @@
+{
+  "name": "weather_backend",
+  "version": "1.0.0",
+  "description": "Simple backend for my weather application",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "migrate": "node src/pg/migrate"
+  },
+  "author": "Eugene Omelyanovich",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
+  }
+}
