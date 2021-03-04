@@ -29,7 +29,7 @@
 }
 
 .title--lower {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .unstyled-list {
@@ -155,6 +155,11 @@
 .rounded--circle {
     border-radius: 50%;
     padding: 1.25rem 1.45rem;
+}
+
+.weather-icon {
+    width: 50px;
+    height: 50px;
 }
 
 .favorite-deck__item {
