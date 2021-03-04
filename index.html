@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeatherApp</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <main class="main container">
+        <div class="container__inner">
+
+            <div class="row mt-2">
+                <div class="row__item title">
+                    Погода здесь
+                </div>
+                <div class="row__item ml-auto mt-auto mb-auto">
+                    <button class="btn btn--default">
+                        Обновить геолокацию
+                    </button>
+                </div>
+            </div>
+
+            <section class="current-weather grid-container  mt-2">
+                <div class="current-weather__main-info col">
+                    <h1 class="title main-info__title mt-0">
+                        Saint-Petersburg
+                    </h1>
+                    <div class="row">
+                        <div class="row__item main-info__img">
+                            <img src="https://placekitten.com/150/150" alt="Текущая погода">
+                        </div>
+                        <div class="row__item title title--bigger ml-auto main-info__temp temp">
+                            8
+                        </div>
+                    </div>
+                </div>
+                <div class="current-weather__additional-info col">
+                    <ul class="additional-info__list unstyled-list ml-0">
+                        <li class="list-item">
+                            <strong class="list-item__title">Ветер</strong>
+                            <span class="list-item__info">Что-то там дует...</span>
+                        </li>
+                        <li class="list-item">
+                            <strong class="list-item__title">Ветер</strong>
+                            <span class="list-item__info">Что-то там дует...</span>
+                        </li>
+                        <li class="list-item">
+                            <strong class="list-item__title">Ветер</strong>
+                            <span class="list-item__info">Что-то там дует...</span>
+                        </li>
+                        <li class="list-item">
+                            <strong class="list-item__title">Ветер</strong>
+                            <span class="list-item__info">Что-то там дует...</span>
+                        </li>
+                        <li class="list-item">
+                            <strong class="list-item__title">Ветер</strong>
+                            <span class="list-item__info">Что-то там дует...</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="favorite grid-container mt-2">
+                <div class="favorite col">
+                    <div class="row h-100">
+                        <h2 class="m-0 my-auto">Избранное</h2>
+                    </div>
+                </div>
+                <div class="favorite col">
+                    <div class="row">
+                        <form class="form favorite__form w-100">
+                            <div class="row w-100">
+                                <input
+                                    type="text"
+                                    placeholder="Добавить новый город"
+                                    class="form-input mr-2 w-100"
+                                >
+                                <button
+                                    type="submit"
+                                    class="btn btn--default rounded--circle"
+                                >
+                                    +
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="favorite-deck grid-container">
+                <div class="col">
+                    <div class="favorite-deck__item">
+                        <header class="deck-item__title row w-100">
+                            <strong class="row__item title title--lower">
+                                Москва
+                            </strong>
+                            <span class="temp title title--lower row__item">
+                                5
+                            </span>
+                            <img
+                                src="https://placekitten.com/50/50"
+                                alt="Иконка погоды"
+                                class="row__item"
+                            >
+
+                            <button class="btn btn--default rounded--circle ml-auto">
+                                &times;
+                            </button>
+                        </header>
+                        <ul class="deck-item__body unstyled-list ml-0">
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="favorite-deck__item">
+                        <header class="deck-item__title row w-100">
+                            <strong class="row__item title title--lower">
+                                Москва
+                            </strong>
+                            <span class="row__item title title--lower temp">
+                                5
+                            </span>
+                            <img
+                                src="https://placekitten.com/50/50"
+                                alt="Иконка погоды"
+                                class="row__item"
+                            >
+
+                            <button class="btn btn--default rounded--circle ml-auto">
+                                &times;
+                            </button>
+                        </header>
+                        <ul class="deck-item__body unstyled-list ml-0">
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                            <li class="list-item">
+                                <strong class="list-item__title">Ветер</strong>
+                                <span class="list-item__info">Что-то там дует...</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
