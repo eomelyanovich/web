@@ -14,18 +14,19 @@ const CURRENT_WEATHER = {
 const getUrl = (params) => {
     const { path, q, lat, lon } = params;
 
-    const baseUrl = 'https://api.openweathermap.org/data/2.5/';
+    // const baseUrl = 'https://api.openweathermap.org/data/2.5/';
+    const baseUrl = 'http://localhost:5000';
 
-    const apiKey = 'ea0e178f344b162038e647a40559937f';
+    // const apiKey = 'ea0e178f344b162038e647a40559937f';
 
-    const url = `${baseUrl}/${path}?q=${q},ru&lat=${lat}&lon=${lon}&units=metric&APPID=${apiKey}`;
+    const url = `${baseUrl}/${path}?q=${q}&lat=${lat}&lon=${lon}`;
 
     return url;
 };
 
 const getWeatherByCityName = async (cityName) => {
     const params = {
-        path: 'weather',
+        path: 'weather/city',
         q: cityName        
     };
 
@@ -74,13 +75,19 @@ const getElementsCount = (selector) => {
     return elementsArray.length
 };
 
-const removeCity = (cityName) => {
+const removeCity = async (cityName) => {
     const cityElem = document.querySelector(`.city-${cityName}`);
 
-    const currCities = JSON.parse(localStorage.getItem('cities'));
-    const newCities = currCities.filter((city) => city !== cityName);
+    const url = 'http://localhost:5000/cities/delete';
 
-    localStorage.setItem('cities', JSON.stringify(newCities));
+    const response = await fetch(url, {
+        method: 'DELETE',
+        body: JSON.stringify({ city: cityName }),
+        headers: { 'Content-type': 'application/json' }
+    });
+
+    const responseJson = await response.json();
+
 
     return cityElem.remove()
 };
@@ -179,25 +186,28 @@ const submitForm = async () => {
         return;
     }
 
-    const currCities = JSON.parse(localStorage.getItem('cities'));
-
     const weatherResponse = await getWeatherByCityName(cityName);
 
     const { name } = weatherResponse;
 
-    const isCityExist = currCities.includes(name);
+    const url = 'http://localhost:5000/cities/create';
 
-    if (isCityExist) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: JSON.stringify({ city: name }),
+            headers: { 'Content-type': 'application/json' }
+        });
+
+        const responseJson = await response.json();
+
+        showWeather(weatherResponse);
+
+        form.reset();
+    } catch (e) {
         alert(`Город ${cityName} уже есть в списке`)
-        return false
+        return false;
     }
-
-    currCities.push(name);
-    localStorage.setItem('cities', JSON.stringify(currCities));
-
-    showWeather(weatherResponse);
-
-    form.reset();
 };
 
 const showCurrentWeather = (weatherResponse) => {
@@ -211,7 +221,7 @@ const showCurrentWeather = (weatherResponse) => {
         if (!isIcon) {
             document
                 .querySelector(`.${CURRENT_WEATHER[key]}`)
-                .innerHTML = weatherParams[key] || 'Saint-Petersburg';
+                .innerHTML = weatherParams[key];
         } else {
             document
                 .querySelector(`.${CURRENT_WEATHER[key]} img`)
@@ -230,7 +240,7 @@ const loadCurrentWeather = async (position) => {
     const { latitude, longitude } = coords;
 
     const params = {
-        path: 'weather',
+        path: 'weather/coordinates',
         lat: latitude,
         lon: longitude
     };
@@ -244,18 +254,24 @@ const loadCurrentWeather = async (position) => {
     showCurrentWeather(responseJson);
 };
 
+const loadCities = async () => {
+    const url = 'http://localhost:5000/cities/all';
+
+    const response = await fetch(url);
+    const responseJson = await response.json();
+
+    return responseJson;
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     getGeolocation();
 
-    const currCities = localStorage.getItem('cities');
+    const currCities = await loadCities();
 
-    if (!currCities) {
-        localStorage.setItem('cities', JSON.stringify([]));
-        return;
-    };
+    console.log('curr cities', currCities);
 
-    for (const currCity of JSON.parse(currCities)) {
-        const weatherResponse = await getWeatherByCityName(currCity);
+    for (const currCity of currCities) {
+        const weatherResponse = await getWeatherByCityName(currCity.city);
         showWeather(weatherResponse)
     };
 });
